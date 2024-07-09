@@ -1,3 +1,13 @@
+## OVERVIEW
+
+- This repo is a forked copy from [https://repo.or.cz/ppcg.git](https://repo.or.cz/ppcg.git).
+
+- **The commit is `90e2162`** which was published on April 2, 2023.
+
+## LICENSE
+
+ppcg is available under the MIT LICENSE. Please see the file [`LICENSE`](LICENSE) in the top-level directory for more details. And all modifications and additions made in this forked copy is under [`LICENSE_ADDITIONAL`](LICENSE_ADDITIONAL).
+
 ## For the SUPER-FAST SETUP & to start working with `ppcg-forked` copy, follow the [doc/helper-docs/SUPERFAST-PLAY-WITH-PPCG.md](doc/helper-docs/SUPERFAST-PLAY-WITH-PPCG.md) doc. (Recommended for superusers)
 
 ## For the `ppcg-forked` copy detailed setup instructions, Please check the [doc/helper-docs/SETUP-PPCG-DETAILS.md](doc/helper-docs/SETUP-PPCG-DETAILS.md) doc.
