@@ -1,11 +1,10 @@
-
-
-
 # Clean up root dir
 echo "Cleaning up project-root/"
 rm -Rf autoconf/ autom4te.cache/ build/ installation/
 rm m4/libtool.m4 m4/lt~obsolete.m4 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4
-rm configure aclocal.m4 compile config.guess config.sub depcomp install-sh ltmain.sh Makefile.in missing
+rm configure aclocal.m4 Makefile.in
+# rm compile config.guess config.sub depcomp install-sh ltmain.sh missing
+
 
 # Clean up isl
 echo "Cleaning up isl/"

@@ -7,10 +7,10 @@ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 dnl Determine a C compiler to use
 AC_PROG_CC
 
-dnl Set C standard to C11
+dnl Set C standard to C17
 AX_CHECK_COMPILE_FLAG([-std=gnu17],
  [CFLAGS="$CFLAGS -std=gnu17"],
-  [AC_MSG_ERROR([Compiler does not support C11])])
+  [AC_MSG_ERROR([Compiler does not support C17])])
 
 
 if test -n "${CXXFLAGS}"; then
