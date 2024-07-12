@@ -29,6 +29,14 @@ opencl_test.sh
 polybench_test.sh
 
 # Later added for the forked copy
+autoconf/
+
+# .vscode genrated
+.vscode/browse.vc.db
+.vscode/browse.vc.db-shm
+.vscode/browse.vc.db-wal
+
+# Specific to this project
 build/
 installation/
 

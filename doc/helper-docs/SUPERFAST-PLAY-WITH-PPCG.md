@@ -153,7 +153,7 @@ Though the `--prefix=` is set to `ppcg-forked/installation`, so the bins can be 
 
 ### 8.1. Using `ppcg` bin (The idea)
 
-- Usage format `ppcg --target=cuda [c|cuda|opencl] <input.c> -o <output.c>`. Example `./installation/bin/ppcg test/matmul.c -o test/transformed_matmul.c`
+- Usage format `ppcg --target=cuda [c|cuda|opencl] <input.c> -o <output.c>`. Example `./installation/bin/ppcg tests/matmul.c -o test/transformed_matmul.c`
 
 ### 8.2. Using `ppcg` bin (w/ `--target=cuda`)
 

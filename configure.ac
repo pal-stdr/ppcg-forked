@@ -1,11 +1,39 @@
 AC_INIT([ppcg], [0.09.1], [isl-development@googlegroups.com])
-AC_CONFIG_AUX_DIR([.])
+AC_CONFIG_AUX_DIR([autoconf])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([foreign])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
+dnl Determine a C compiler to use
 AC_PROG_CC
+
+dnl Set C standard to C11
+AX_CHECK_COMPILE_FLAG([-std=gnu17],
+ [CFLAGS="$CFLAGS -std=gnu17"],
+  [AC_MSG_ERROR([Compiler does not support C11])])
+
+
+if test -n "${CXXFLAGS}"; then
+	user_set_cxxflags=yes
+fi
+
+dnl Determine a C++ compiler to use
+AC_PROG_CXX
+AX_CXX_COMPILE_STDCXX(17, noext, mandatory)
+if test X$user_set_cxxflags != Xyes; then
+	dnl Enable all warnings.
+	CXXFLAGS="-Wall"
+fi
+
+
+dnl Checks for header files.
+AC_CHECK_HEADERS([float.h limits.h locale.h stddef.h stdint.h stdlib.h string.h])
+
+
+dnl LT_INIT is a libtool package used in Autotools projects to handle the building and installation of shared libraries, static libraries, and executable programs.
 LT_INIT
+
+dnl a macro provided by pkg-config. This helper tool used when compiling applications and libraries. It simplifies the process of managing library compile and link flags, ensuring that the correct paths and options are used during the build process.
 PKG_PROG_PKG_CONFIG
 
 AX_CHECK_OPENMP

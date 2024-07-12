@@ -50,6 +50,8 @@ sudo apt-get install automake autoconf libtool libtool-bin pkg-config libgmp3-de
 
 - **`Clang` should be built (not recommended w/ `apt-get install`)**. Because we consider that you might have other `Clang` versions in your machine.
 
+- As prerequisite to build clang/llvm, you need to have [`cmake`](https://cmake.org/download/) & [`ninja`](https://github.com/ninja-build/ninja/releases) installed.
+
 - We will be passing path of `Clang` using the `--with-clang-prefix=$CLANG_BUILD_PATH` in ppcg's `configure` command.
 
 - Make sure of that, the `Clang` lib path is added to your `LD_LIBRARY_PATH` after your build the `Clang`.
@@ -404,7 +406,7 @@ Though the `--prefix=` is set to `ppcg-forked/installation`, so the bins can be 
 
 ### 3.1. Using `ppcg` bin (The idea)
 
-- Usage format `ppcg --target=cuda [c|cuda|opencl] <input.c> -o <output.c>`. Example `./installation/bin/ppcg test/matmul.c -o test/transformed_matmul.c`
+- Usage format `ppcg --target=cuda [c|cuda|opencl] <input.c> -o <output.c>`. Example `./installation/bin/ppcg tests/matmul.c -o test/transformed_matmul.c`
 
 ### 3.2. Using `ppcg` bin (w/ `--target=cuda`)
 
