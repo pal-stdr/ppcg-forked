@@ -8,3 +8,6 @@
 	path = cjson
 	url = https://github.com/pal-stdr/cJSON-forked.git
 	branch = v1.7.18-for-ppcg
+[submodule "osl"]
+	path = osl
+	url = https://github.com/periscop/openscop.git
