@@ -4,3 +4,7 @@
 [submodule "pet"]
 	path = pet
 	url = git://repo.or.cz/pet.git
+[submodule "cjson"]
+	path = cjson
+	url = https://github.com/pal-stdr/cJSON-forked.git
+	branch = v1.7.18-for-ppcg
