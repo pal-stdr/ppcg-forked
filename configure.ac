@@ -80,6 +80,73 @@ system)
 	;;
 esac
 
+
+dnl ============ openscop (osl) ==============
+AX_SUBMODULE(osl,build|bundled,bundled)
+AM_CONDITIONAL(BUNDLED_OSL, test $with_osl = bundled)
+dnl AX_SUBMODULE(osl,build|bundled,build)
+dnl AM_CONDITIONAL(BUILD_OSL, test $with_osl = build)
+AC_SUBST(OSL_CFLAGS)
+AC_SUBST(OSL_LIBS)
+case "$with_osl" in
+bundled)
+	OSL_CFLAGS="$OSL_CFLAGS -I\$(top_srcdir)"
+	OSL_CFLAGS="$OSL_CFLAGS"
+	;;
+
+build)
+	echo "Debug: with_osl_builddir = $with_osl_builddir"
+    if test -n "$with_osl_builddir"; then
+        OSL_BUILDDIR=`cd $with_osl_builddir && pwd`
+    else
+        OSL_BUILDDIR=`pwd`/osl  # Assuming the osl directory is in the current build directory
+    fi
+    echo "Debug: OSL_BUILDDIR = $OSL_BUILDDIR"
+	# OSL_BUILDDIR=`echo @abs_builddir@ | $with_osl_builddir/config.status --file=-`
+	ppcg_configure_args="$ppcg_configure_args --with-osl-builddir=$CJSON_BUILDDIR"
+	OSL_CFLAGS="-I$OSL_BUILDDIR"
+	OSL_CFLAGS="$OSL_CFLAGS"
+	OSL_LIBS="$OSL_BUILDDIR/libosl.la"
+	;;
+
+esac
+dnl ============ openscop (osl) ==============
+
+
+
+dnl ============ cJSON (cjson) ==============
+AX_SUBMODULE(cjson,build|bundled|system,bundled)
+AM_CONDITIONAL(BUNDLED_CJSON, test $with_cjson = bundled)
+dnl AX_SUBMODULE(cjson,build|bundled|system,build)
+dnl AM_CONDITIONAL(BUILD_CJSON, test $with_cjson = build)
+AC_SUBST(CJSON_CFLAGS)
+AC_SUBST(CJSON_LIBS)
+case "$with_cjson" in
+bundled)
+	CJSON_CFLAGS="$CJSON_CFLAGS -I\$(top_srcdir)"
+	CJSON_CFLAGS="$CJSON_CFLAGS"
+	;;
+build)
+	echo "Debug: with_cjson_builddir = $with_cjson_builddir"
+    if test -n "$with_cjson_builddir"; then
+        CJSON_BUILDDIR=`cd $with_cjson_builddir && pwd`
+    else
+        CJSON_BUILDDIR=`pwd`/cjson  # Assuming the cjson directory is in the current build directory
+    fi
+    echo "Debug: CJSON_BUILDDIR = $CJSON_BUILDDIR"
+	# CJSON_BUILDDIR=`echo @abs_builddir@ | $with_cjson_builddir/config.status --file=-`
+	ppcg_configure_args="$ppcg_configure_args --with-cjson-builddir=$CJSON_BUILDDIR"
+	CJSON_CFLAGS="-I$CJSON_BUILDDIR"
+	CJSON_CFLAGS="$CJSON_CFLAGS"
+	CJSON_LIBS="$CJSON_BUILDDIR/libcJSON.la"
+	;;
+system)
+	PKG_CHECK_MODULES([CJSON], [cjson])
+	;;
+esac
+dnl ============ cJSON (cjson) ==============
+
+
 AC_SUBST(POLYBENCH_DIR)
 AC_SUBST(extra_tests)
 AC_ARG_WITH([polybench],
@@ -101,6 +168,12 @@ if test $with_isl = bundled; then
 fi
 if test $with_pet = bundled; then
 	AC_CONFIG_SUBDIRS(pet)
+fi
+if test $with_osl = bundled; then
+	AC_CONFIG_SUBDIRS(osl)
+fi
+if test $with_cjson = bundled; then
+	AC_CONFIG_SUBDIRS(cjson)
 fi
 AC_CONFIG_COMMANDS_POST([
 	dnl pass on arguments to subdir configures, but don't
