@@ -18,7 +18,7 @@ LLVM_FOR_PET_INSTALLATION_ROOT=/path/to/llvm-16-src-build/installation
 
 # If you already have another Clang version in your machine, and you are using another "clang" version, you need to keep this part.
 LLVM_FOR_PET_LIB_PATH=$LLVM_FOR_PET_INSTALLATION_ROOT/lib
-export LD_LIBRARY_PATH=$LLVM_FOR_PET_LIB_PATH${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH="$LLVM_FOR_PET_LIB_PATH${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
 
 
