@@ -4,3 +4,6 @@
 [submodule "pet"]
 	path = pet
 	url = git://repo.or.cz/pet.git
+[submodule "osl"]
+	path = osl
+	url = https://github.com/periscop/openscop.git
