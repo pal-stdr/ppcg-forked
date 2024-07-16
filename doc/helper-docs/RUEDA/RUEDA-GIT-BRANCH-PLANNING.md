@@ -1,5 +1,13 @@
 # Branch Planning
 
+
+<figure class="image">
+  <img src="../assets/gitflow-with-release-branche.svg" alt="Gitflow with Release branch"  width="800" height="514" />
+  <figcaption>Gitflow with Release branch (credit: https://www.atlassian.com/)</figcaption>
+</figure>
+
+
+
 - This git flow is inspired by the [Gitflow workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
 - Some tweaks have been made to adapt with the project development requirements.
 - **Though our `master` branch is locked for syncing with the core [ppcg](https://repo.or.cz/ppcg.git) repo, we made a few tweaks.**
@@ -20,6 +28,12 @@
                 ├── feature-3
                 └── release/v0.1.0
 ```
+
+<figure class="image">
+  <img src="../assets/gitflow-with-hotfix-branches.svg" alt="Gitflow with Release branch"  width="800" height="514" />
+  <figcaption>Gitflow with Hotfix branch (credit: https://www.atlassian.com/)</figcaption>
+</figure>
+
 
 # Core workflow
 
