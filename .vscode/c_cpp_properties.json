@@ -3,7 +3,17 @@
         "myIncludePath": [
             "${workspaceFolder}",
             "${workspaceFolder}/isl/include",
-            "${workspaceFolder}/pet/include"
+            "${workspaceFolder}/pet/include",
+            "${workspaceFolder}/osl/include",
+            "${workspaceFolder}/build/osl/include",
+            "${workspaceFolder}/json/single_include",
+            "${workspaceFolder}/rueda/include",
+            "${workspaceFolder}/rueda/include/librueda",
+            "${workspaceFolder}/rueda/include/librueda/gpu",
+            "${workspaceFolder}/rueda/include/librueda/fpga",
+            "${workspaceFolder}/rueda/lib",
+            "${workspaceFolder}/rueda/lib/gpu",
+            "${workspaceFolder}/rueda/lib/fpga"
         ],
         "myDefines": [
             "DEBUG",

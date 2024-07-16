@@ -81,3 +81,48 @@ dist-hook:
 
 gitversion.h: @GIT_HEAD@
 	$(AM_V_GEN)echo '#define GIT_HEAD_ID "'@GIT_HEAD_VERSION@'"' > $@
+
+
+
+
+
+
+
+
+# ======= RUEDA lib + bin HANDLER ========
+
+
+# Rueda bin + lib generator (ruedabin + librueda.la) target definitions
+# The details of compilation configs are defined in "rueda/Makefile.am"
+# Following is a recursive target calling chain.
+# 1st, "PHONY: ruedabin" targed is called.
+# 2nd, "ruedabin" from "PHONY: ruedabin" calls target "librueda".
+# 3rd, "librueda" from "librueda: force" calls target "force".
+# 4th, "force" target is defined as "true".
+# 5th, so "librueda: force" becomes "librueda: true". So the "$(MAKE) $(MFLAGS) -C rueda/lib/ librueda.la" is executed. By reading only the "lib/" dir from "rueda/" dir, the "librueda.la" is built.
+# 6th, "ruedabin: librueda" is satisfied as target build dependency. So "$(MAKE) $(MFLAGS) -C rueda/ ruedabin" is executed and "ruedabin" is built.
+# until this point we have "librueda" & "ruedabin" is built.
+# 7th, ".PHONY: binit" target is called.
+# 8th, (Not used) "binit" target definition executed. copy the "build/rueda/ruedabin" to "installation/bin/ruedabin". Here "installation/" is the path set in the ppcg configure --prefix=/abs/path/to/installation. Also copy the "build/rueda/librueda" to "installation/lib/librueda"
+
+# # Works, but no need to handle. In "rueda/Makefile.am"
+# .PHONY: binit
+
+# binit:
+# 	cp -f rueda/ruedabin bin/
+# 	cp -f rueda/librueda.la lib/
+
+
+
+force:
+	true
+
+librueda: force
+	$(MAKE) $(MFLAGS) -C rueda/lib/ librueda.la
+
+ruedabin: librueda
+	$(MAKE) $(MFLAGS) -C rueda/ ruedabin
+
+PHONY: ruedabin
+
+

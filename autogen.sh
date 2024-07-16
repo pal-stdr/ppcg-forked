@@ -5,4 +5,10 @@ fi
 if test -f pet/autogen.sh; then
 	(cd pet; ./autogen.sh)
 fi
-autoreconf -i
+
+echo -e "\n*** Running autotools on osl ***"
+if test -f osl/autogen.sh; then
+	(cd osl; ./autogen.sh)
+fi
+
+autoreconf -vi

@@ -44,7 +44,8 @@ fi
 
 AX_SUBMODULE(isl,build|bundled|system,bundled)
 AM_CONDITIONAL(BUNDLED_ISL, test $with_isl = bundled)
-
+dnl Important. rueda will use this build.
+AM_CONDITIONAL(EXTERNAL_ISL, test x$external_isl = xfalse)
 AC_SUBST(ISL_CFLAGS)
 AC_SUBST(ISL_LIBS)
 case "$with_isl" in
@@ -80,6 +81,39 @@ system)
 	;;
 esac
 
+
+dnl ============ openscop (osl) ==============
+AX_SUBMODULE(osl,build|bundled,bundled)
+AM_CONDITIONAL(BUNDLED_OSL, test $with_osl = bundled)
+dnl AX_SUBMODULE(osl,build|bundled,build)
+dnl AM_CONDITIONAL(BUILD_OSL, test $with_osl = build)
+AC_SUBST(OSL_CFLAGS)
+AC_SUBST(OSL_LIBS)
+case "$with_osl" in
+bundled)
+	OSL_CFLAGS="$OSL_CFLAGS -I\$(top_srcdir)"
+	OSL_CFLAGS="$OSL_CFLAGS"
+	;;
+
+build)
+	echo "Debug: with_osl_builddir = $with_osl_builddir"
+    if test -n "$with_osl_builddir"; then
+        OSL_BUILDDIR=`cd $with_osl_builddir && pwd`
+    else
+        OSL_BUILDDIR=`pwd`/osl  # Assuming the osl directory is in the current build directory
+    fi
+    echo "Debug: OSL_BUILDDIR = $OSL_BUILDDIR"
+	# OSL_BUILDDIR=`echo @abs_builddir@ | $with_osl_builddir/config.status --file=-`
+	ppcg_configure_args="$ppcg_configure_args --with-osl-builddir=$CJSON_BUILDDIR"
+	OSL_CFLAGS="-I$OSL_BUILDDIR"
+	OSL_CFLAGS="$OSL_CFLAGS"
+	OSL_LIBS="$OSL_BUILDDIR/libosl.la"
+	;;
+
+esac
+dnl ============ openscop (osl) ==============
+
+
 AC_SUBST(POLYBENCH_DIR)
 AC_SUBST(extra_tests)
 AC_ARG_WITH([polybench],
@@ -94,6 +128,10 @@ AC_ARG_WITH([polybench],
 AX_DETECT_GIT_HEAD
 
 AC_CONFIG_FILES(Makefile)
+
+dnl Check if the "Makefile" is generated at "rueda/Makefile"
+AC_CONFIG_FILES([rueda/Makefile])
+
 AC_CONFIG_FILES([polybench_test.sh], [chmod +x polybench_test.sh])
 AC_CONFIG_FILES([opencl_test.sh], [chmod +x opencl_test.sh])
 if test $with_isl = bundled; then
@@ -101,6 +139,9 @@ if test $with_isl = bundled; then
 fi
 if test $with_pet = bundled; then
 	AC_CONFIG_SUBDIRS(pet)
+fi
+if test $with_osl = bundled; then
+	AC_CONFIG_SUBDIRS(osl)
 fi
 AC_CONFIG_COMMANDS_POST([
 	dnl pass on arguments to subdir configures, but don't
