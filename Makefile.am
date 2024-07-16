@@ -8,7 +8,15 @@ if BUNDLED_PET
     PET_LA = $(top_builddir)/pet/libpet.la
 endif
 
-SUBDIRS = $(MAYBE_ISL) $(MAYBE_PET) .
+
+# Handle osl
+MAYBE_OSL = osl
+OSL_LA = $(top_builddir)/osl/libosl.la
+LOCAL_OSL_LA = osl/libosl.la
+
+
+SUBDIRS = $(MAYBE_ISL) $(MAYBE_PET) $(MAYBE_OSL) rueda .
+
 
 FORCE:
 isl/libisl.la: FORCE
@@ -16,13 +24,26 @@ isl/libisl.la: FORCE
 pet/libpet.la: $(LOCAL_ISL_LA) FORCE
 	cd pet; $(MAKE) $(AM_MAKEFLAGS) libpet.la
 
+
+# osl setup
+# For "BUNDLED_OSL". Comment this target if BUILD_OSL is used
+$(LOCAL_OSL_LA):
+	cd osl; $(MAKE) $(AM_MAKEFLAGS) libosl.la
+
+# For "BUILD_OSL", no target definition is necessary
+
+
+
 ACLOCAL_AMFLAGS = -I m4
 
 LIB_ISL = $(ISL_LA) @ISL_LIBS@
 LIB_PET = $(PET_LA) @PET_LIBS@
+LIB_OSL = $(OSL_LA) @OSL_LIBS@
 
-AM_CPPFLAGS = @ISL_CFLAGS@ @PET_CFLAGS@
-LDADD = $(LIB_PET) $(LIB_ISL)
+
+AM_CPPFLAGS = @ISL_CFLAGS@ @PET_CFLAGS@ @OSL_CFLAGS@
+LDADD = $(LIB_PET) $(LIB_ISL) $(LIB_OSL)
+
 
 bin_PROGRAMS = ppcg
 ppcg_SOURCES = \
