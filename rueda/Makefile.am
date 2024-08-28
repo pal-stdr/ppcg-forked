@@ -18,11 +18,11 @@ MAINTAINERCLEANFILES = Makefile.in
 
 # Check if the ISL is installed in the system, or built in the parent dir
 if EXTERNAL_ISL
-	# ISL_INCLUDE, ISL_LIBADD were already defined (coming from system)
+    # ISL_INCLUDE, ISL_LIBADD were already defined (coming from system)
 else
-	# ISL built in the parent dir
-	ISL_INCLUDE = -I$(top_srcdir)/isl/include -I$(top_builddir)/isl/include
-	ISL_LIBADD = $(top_builddir)/isl/libisl.la
+    # ISL built in the parent dir
+    ISL_INCLUDE = -I$(top_srcdir)/isl/include -I$(top_builddir)/isl/include
+    ISL_LIBADD = $(top_builddir)/isl/libisl.la
 endif
 
 
