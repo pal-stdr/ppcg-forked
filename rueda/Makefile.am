@@ -18,11 +18,11 @@ MAINTAINERCLEANFILES = Makefile.in
 
 # Check if the ISL is installed in the system, or built in the parent dir
 if EXTERNAL_ISL
-    # ISL_INCLUDE, ISL_LIBADD were already defined (coming from system)
+	# ISL_INCLUDE, ISL_LIBADD were already defined (coming from system)
 else
-    # ISL built in the parent dir
-    ISL_INCLUDE = -I$(top_srcdir)/isl/include -I$(top_builddir)/isl/include
-    ISL_LIBADD = $(top_builddir)/isl/libisl.la
+	# ISL built in the parent dir
+	ISL_INCLUDE = -I$(top_srcdir)/isl/include -I$(top_builddir)/isl/include
+	ISL_LIBADD = $(top_builddir)/isl/libisl.la
 endif
 
 
@@ -38,18 +38,18 @@ lib_LTLIBRARIES = librueda.la
 
 # -I include flags for C++ compiler (typically *.hpp files)
 librueda_la_CXXFLAGS = $(OPT_FLAGS) $(DEBUG_FLAGS) \
-        $(ISL_INCLUDE) \
-        -I$(top_srcdir)/pet/include \
+		$(ISL_INCLUDE) \
+		-I$(top_srcdir)/pet/include \
 		-I../osl/include \
-   		-I$(top_srcdir)/osl/include \
-        -I$(top_srcdir)/json/single_include \
-        -I$(top_srcdir)/rueda/include \
-        -I$(top_srcdir)/rueda/include/librueda \
-        -I$(top_srcdir)/rueda/include/librueda/gpu \
-        -I$(top_srcdir)/rueda/include/librueda/fpga \
-        -I$(top_srcdir)/rueda/lib/gpu \
-        -I$(top_srcdir)/rueda/lib/fpga \
-        -I$(top_srcdir)/rueda/lib
+		-I$(top_srcdir)/osl/include \
+		-I$(top_srcdir)/json/single_include \
+		-I$(top_srcdir)/rueda/include \
+		-I$(top_srcdir)/rueda/include/librueda \
+		-I$(top_srcdir)/rueda/include/librueda/gpu \
+		-I$(top_srcdir)/rueda/include/librueda/fpga \
+		-I$(top_srcdir)/rueda/lib/gpu \
+		-I$(top_srcdir)/rueda/lib/fpga \
+		-I$(top_srcdir)/rueda/lib
 
 
 # -I include flags for C compiler
@@ -61,12 +61,12 @@ librueda_la_CFLAGS = \
 
 # Source files for the library
 librueda_la_SOURCES = \
-        lib/fpga/rueda_fpga_options.c \
-        lib/fpga/rueda_fpga.c \
-        lib/gpu/rueda_gpu_logger.cpp \
-        lib/gpu/rueda_gpu_options.c \
-        lib/gpu/rueda_gpu.c \
-        lib/rueda_options.c \
+		lib/fpga/rueda_fpga_options.c \
+		lib/fpga/rueda_fpga.c \
+		lib/gpu/rueda_gpu_logger.cpp \
+		lib/gpu/rueda_gpu_options.c \
+		lib/gpu/rueda_gpu.c \
+		lib/rueda_options.c \
 		lib/rueda.cpp
 
 
@@ -78,10 +78,10 @@ librueda_la_LDFLAGS = -static
 # Dependencies for the library
 # libpet needs to come later after libisl so that the right isl is linked.
 librueda_la_LIBADD = \
-        $(ISL_LIBADD) \
-        ../pet/libpet.la \
+		$(ISL_LIBADD) \
+		../pet/libpet.la \
 		../osl/libosl.la \
-        -lm
+		-lm
 
 
 # # Create librueda.la target manually
@@ -99,8 +99,8 @@ bin_PROGRAMS = ruedabin
 
 
 ruedabin_SOURCES = \
-        main.cpp \
-        utility.cpp
+		main.cpp \
+		utility.cpp
 
 
 # -I include flags for C++ compiler (typically *.hpp files)
@@ -111,8 +111,8 @@ ruedabin_CXXFLAGS = $(librueda_la_CXXFLAGS)
 # -I include flags for C compiler
 # To avoid same name object from being created with/without libtool.
 ruedabin_CFLAGS = \
-        $(AM_CFLAGS) \
-        $(ruedabin_CXXFLAGS)
+		$(AM_CFLAGS) \
+		$(ruedabin_CXXFLAGS)
 
 
 ruedabin_LDFLAGS = -static
@@ -120,11 +120,11 @@ ruedabin_LDFLAGS = -static
 
 # libpet needs to come later after libisl so that the right isl is linked.
 ruedabin_LDADD =  \
-        $(ISL_LIBADD) \
-        ../pet/libpet.la \
+		$(ISL_LIBADD) \
+		../pet/libpet.la \
 		../osl/libosl.la \
-        librueda.la \
-        -lm
+		librueda.la \
+		-lm
 
 
 
@@ -138,12 +138,12 @@ includedir = $(prefix)/include/$(PACKAGE_NAME)
 
 # Then tell the automake, which header files are to be dumped in "includedir" path
 nobase_include_HEADERS = \
-    include/utility.hpp \
-    include/librueda/rueda.hpp \
-    include/librueda/fpga/rueda_fpga.h \
-    include/librueda/fpga/rueda_fpga_options.h \
-    include/librueda/gpu/rueda_gpu.h \
-    include/librueda/gpu/rueda_gpu_options.h
+	include/utility.hpp \
+	include/librueda/rueda.hpp \
+	include/librueda/fpga/rueda_fpga.h \
+	include/librueda/fpga/rueda_fpga_options.h \
+	include/librueda/gpu/rueda_gpu.h \
+	include/librueda/gpu/rueda_gpu_options.h
 
 
 # This hook handles the dumping process in "--prefix=" path
